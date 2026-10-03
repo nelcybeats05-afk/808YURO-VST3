@@ -18,7 +18,8 @@ void YuroExactProcessor::releaseResources(){delay.reset();lpL.reset();lpR.reset(
 bool YuroExactProcessor::isBusesLayoutSupported(const BusesLayout& x) const {auto in=x.getMainInputChannelSet(),out=x.getMainOutputChannelSet();return in==out&&(out==juce::AudioChannelSet::mono()||out==juce::AudioChannelSet::stereo());}
 void YuroExactProcessor::processBlock(juce::AudioBuffer<float>& b,juce::MidiBuffer&){
  const float a=apvts.getRawParameterValue("amount")->load(); const int e=(int)apvts.getRawParameterValue("effect")->load(); const int st=(int)apvts.getRawParameterValue("style")->load(); const int gr=(int)apvts.getRawParameterValue("grid")->load(); const float bpm=apvts.getRawParameterValue("bpm")->load(); const int mode=(int)apvts.getRawParameterValue("mode")->load(); const int n=b.getNumSamples(); const int ch=b.getNumChannels();
- const float beat=60.f/juce::jmax(40.f,bpm), grid=beat*(gr==0?.5f:.25f);
+ const float beat = 60.0f / juce::jmax(40.0f, bpm);
+const float grid = beat * (gr == 0 ? 0.5f : 0.25f);
  lpL.coefficients=juce::dsp::IIR::Coefficients<float>::makeLowPass(sr,700.f+11000.f*a); lpR.coefficients=lpL.coefficients;
  hpL.coefficients=juce::dsp::IIR::Coefficients<float>::makeHighPass(sr,350.f); hpR.coefficients=hpL.coefficients;
  for(int i=0;i<n;++i){float lfo=.5f+.5f*std::sin(juce::MathConstants<float>::twoPi*i/(sr*juce::jmax(.001f,grid)));
