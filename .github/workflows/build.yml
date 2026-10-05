@@ -1,0 +1,20 @@
+name: Build Windows VST3
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Configure
+        run: cmake -S . -B build -A x64
+      - name: Build
+        run: cmake --build build --config Release --target VST3VocalChainDiag_VST3
+      - name: Upload VST3
+        uses: actions/upload-artifact@v4
+        with:
+          name: VST3VocalChain-DIAG
+          path: build/VST3VocalChainDiag_artefacts/Release/VST3/*.vst3/**
+          if-no-files-found: error
