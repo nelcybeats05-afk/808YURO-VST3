@@ -1,0 +1,11 @@
+VST3EffektsMax - Make Unique Workflow
+
+1. Plugin auf Vocal-Mixerkanal laden.
+2. MIXER AUFNEHMEN druecken, Vocal in FL abspielen, STOP druecken.
+3. Effekt waehlen und berechnen lassen.
+4. MAKE UNIQUE - WAV druecken. Eine neue WAV wird ueber den Browser/WebView-Download gespeichert.
+5. WAV aus dem Download-Ordner in die FL Studio Playlist ziehen.
+
+WICHTIG: Das VST3 kann keinen neuen Playlist-Clip automatisch anlegen.
+Drag aus der WebView direkt in FL ist host-/WebView-abhaengig und nicht garantiert.
+Die neue Version ist nicht auf Windows kompiliert oder in FL getestet.
